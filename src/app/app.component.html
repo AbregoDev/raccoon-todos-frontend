@@ -7,72 +7,71 @@
 <div class="fw-bold m-2">Add</div>
 
 <div class="d-flex align-items-center">
-    <input type="text" class="form-control mx-2">
-    <Button type="button" class="btn p-0 me-2">
+    <input type="text" class="form-control mx-2" [(ngModel)]="newTodoBody">
+    <Button type="button" class="btn p-0 me-2" (click)="addTodo()">
         <span class="bi bi-plus-square fs-2"></span>
     </Button>
 </div>
 
-<div class="fw-bold m-2 mt-4">Completed tasks</div>
+<div *ngIf="completedTasks.length">
+    <div class="fw-bold m-2 mt-4">Completed tasks</div>
 
-<ul class="list-group list-group">
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <input class="form-check-input" type="checkbox" checked="true">
-        <div class="ms-2 me-auto">
-            <div class="fw-normal">Go out for a walk</div>
-        </div>
-        <Button type="button" class="btn p-0 mx-1">
-            <span class="bi bi-trash"></span>
-        </Button>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <input class="form-check-input" type="checkbox" checked="true">
-        <div class="ms-2 me-auto">
-            <div class="fw-normal">Read p. 144</div>
-        </div>
-        <Button type="button" class="btn p-0 mx-1">
-            <span class="bi bi-trash"></span>
-        </Button>
-    </li>
-</ul>
+    <ul class="list-group list-group">
+        <li *ngFor="let task of completedTasks"
+            class="list-group-item d-flex justify-content-between align-items-start">
+            <input class="form-check-input" type="checkbox" checked="true" (change)="toggleCompletness(task)">
+            <div class="ms-2 me-auto">
+                <div class="fw-normal text-secondary text-decoration-line-through">{{ task.body }}</div>
+            </div>
+            <Button type="button" class="btn p-0 mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                (click)="openModalUpdateTask(task)">
+                <span class="bi bi-pencil"></span>
+            </Button>
+            <Button type="button" class="btn p-0 mx-1" (click)="deleteTodo(task)">
+                <span class="bi bi-trash text-danger"></span>
+            </Button>
+        </li>
+    </ul>
+</div>
 
-<div class="fw-bold m-2 mt-4">To do tasks</div>
+<div *ngIf="todoTasks.length">
+    <div class="fw-bold m-2 mt-4">To do tasks</div>
 
-<ul class="list-group list-group">
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <input class="form-check-input" type="checkbox">
-        <div class="ms-2 me-auto">
-            <div class="fw-normal">Do the landry!</div>
+    <ul class="list-group list-group">
+        <li *ngFor="let task of todoTasks" class="list-group-item d-flex justify-content-between align-items-start">
+            <input class="form-check-input" type="checkbox" (change)="toggleCompletness(task)">
+            <div class="ms-2 me-auto">
+                <div class="fw-normal">{{ task.body }}</div>
+            </div>
+            <Button type="button" class="btn p-0 mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                (click)="openModalUpdateTask(task)">
+                <span class="bi bi-pencil"></span>
+            </Button>
+            <Button type="button" class="btn p-0 mx-1" (click)="deleteTodo(task)">
+                <span class="bi bi-trash text-danger"></span>
+            </Button>
+        </li>
+    </ul>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit to-do</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control mx-auto"
+                    [(ngModel)]="editedTask.body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="updateTask()">
+                    Save changes
+                </button>
+            </div>
         </div>
-        <Button type="button" class="btn p-0 mx-1">
-            <span class="bi bi-pencil"></span>
-        </Button>
-        <Button type="button" class="btn p-0 mx-1">
-            <span class="bi bi-trash"></span>
-        </Button>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <input class="form-check-input" type="checkbox">
-        <div class="ms-2 me-auto">
-            <div class="fw-normal">Tidy the room</div>
-        </div>
-        <Button type="button" class="btn p-0 mx-1">
-            <span class="bi bi-pencil"></span>
-        </Button>
-        <Button type="button" class="btn p-0 mx-1">
-            <span class="bi bi-trash"></span>
-        </Button>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <input class="form-check-input" type="checkbox">
-        <div class="ms-2 me-auto">
-            <div class="fw-normal">Study for math exam</div>
-        </div>
-        <Button type="button" class="btn p-0 mx-1">
-            <span class="bi bi-pencil"></span>
-        </Button>
-        <Button type="button" class="btn p-0 mx-1">
-            <span class="bi bi-trash text-danger"></span>
-        </Button>
-    </li>
-</ul>
+    </div>
+</div>
