@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ToDo } from "../interfaces/to-do.interface";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
     providedIn: 'root'
 })
 export class TodoListService {
+
+    private baseApi: string = 'http://localhost:3000/todos';
 
     list: ToDo[] = [
         {
@@ -35,10 +38,10 @@ export class TodoListService {
         },
     ]
 
-    constructor() { }
+    constructor(private http: HttpClient) { }
 
     getTodoList(): Observable<ToDo[]> {
-        return new Observable((observer) => observer.next(this.list));
+        return this.http.get<ToDo[]>(this.baseApi);
     }
 
     addTodo(task: ToDo): Observable<any> {
