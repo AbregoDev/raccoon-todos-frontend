@@ -3,8 +3,76 @@
         <span class="navbar-brand mb-0 h1">To do list</span>
     </div>
 </nav>
-<h1>To do list</h1>
-<label>Inserte algo</label>
-<input type="text">
 
-<i style="font-size: 14px;" class="bi bi-plus-circle"></i>
+<div class="fw-bold m-2">Add</div>
+
+<div class="d-flex align-items-center">
+    <input type="text" class="form-control mx-2">
+    <Button type="button" class="btn p-0 me-2">
+        <span class="bi bi-plus-square fs-2"></span>
+    </Button>
+</div>
+
+<div class="fw-bold m-2 mt-4">Completed tasks</div>
+
+<ul class="list-group list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <input class="form-check-input" type="checkbox" checked="true">
+        <div class="ms-2 me-auto">
+            <div class="fw-normal">Go out for a walk</div>
+        </div>
+        <Button type="button" class="btn p-0 mx-1">
+            <span class="bi bi-trash"></span>
+        </Button>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <input class="form-check-input" type="checkbox" checked="true">
+        <div class="ms-2 me-auto">
+            <div class="fw-normal">Read p. 144</div>
+        </div>
+        <Button type="button" class="btn p-0 mx-1">
+            <span class="bi bi-trash"></span>
+        </Button>
+    </li>
+</ul>
+
+<div class="fw-bold m-2 mt-4">To do tasks</div>
+
+<ul class="list-group list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <input class="form-check-input" type="checkbox">
+        <div class="ms-2 me-auto">
+            <div class="fw-normal">Do the landry!</div>
+        </div>
+        <Button type="button" class="btn p-0 mx-1">
+            <span class="bi bi-pencil"></span>
+        </Button>
+        <Button type="button" class="btn p-0 mx-1">
+            <span class="bi bi-trash"></span>
+        </Button>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <input class="form-check-input" type="checkbox">
+        <div class="ms-2 me-auto">
+            <div class="fw-normal">Tidy the room</div>
+        </div>
+        <Button type="button" class="btn p-0 mx-1">
+            <span class="bi bi-pencil"></span>
+        </Button>
+        <Button type="button" class="btn p-0 mx-1">
+            <span class="bi bi-trash"></span>
+        </Button>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-start">
+        <input class="form-check-input" type="checkbox">
+        <div class="ms-2 me-auto">
+            <div class="fw-normal">Study for math exam</div>
+        </div>
+        <Button type="button" class="btn p-0 mx-1">
+            <span class="bi bi-pencil"></span>
+        </Button>
+        <Button type="button" class="btn p-0 mx-1">
+            <span class="bi bi-trash"></span>
+        </Button>
+    </li>
+</ul>
