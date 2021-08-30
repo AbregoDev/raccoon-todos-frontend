@@ -39,19 +39,16 @@ export class AppComponent implements OnInit {
     }
 
     deleteTodo(task: ToDo): void {
-        console.log(`I'm removing task with id: ${task.id}`)
-
         // Update DOM
         if (task.completed) {
             this.completedTasks = this.completedTasks.filter((todo) => todo.id !== task.id);
-            console.log(this.completedTasks);
         } else {
             this.todoTasks = this.todoTasks.filter((todo) => todo.id !== task.id);
-            console.log(this.todoTasks);
         }
 
         // Remove at DB
-
+        this.todoListService.deleteTodo(task.id)
+            .subscribe();
     }
 
     addTodo(): void {
@@ -70,6 +67,8 @@ export class AppComponent implements OnInit {
             .subscribe((resp) => console.log(resp));
         // Clean input
         this.newTodoBody = '';
+        // Update last id
+        this.newTodoId = (parseInt(this.newTodoId) + 1).toString();
     }
 
     toggleCompletness(task: ToDo): void {

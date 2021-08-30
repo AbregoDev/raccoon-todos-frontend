@@ -23,4 +23,8 @@ export class TodoListService {
     updateTodo(id: string, task: any): Observable<ToDo> {
         return this.http.put<ToDo>(`${this.baseApi}/${id}`, task);
     }
+
+    deleteTodo(id: string): Observable<ToDo> {
+        return this.http.delete<ToDo>(`${this.baseApi}/${id}`);
+    }
 }
