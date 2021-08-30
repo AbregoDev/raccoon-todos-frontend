@@ -88,6 +88,10 @@ export class AppComponent implements OnInit {
 
         // Toggle 'completed' property
         task.completed = !task.completed;
+
+        // Update at DB
+        this.todoListService.updateTodo(task.id, task)
+            .subscribe();
     }
 
     openModalUpdateTask(task: ToDo) {
@@ -105,5 +109,7 @@ export class AppComponent implements OnInit {
         task!.body = this.editedTask.body;
 
         // Update at DB
+        this.todoListService.updateTodo(this.editedTask.id, this.editedTask)
+            .subscribe();
     }
 }

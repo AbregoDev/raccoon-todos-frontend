@@ -19,4 +19,8 @@ export class TodoListService {
     addTodo(task: ToDo): Observable<ToDo> {
         return this.http.post<ToDo>(this.baseApi, task);
     }
+
+    updateTodo(id: string, task: any): Observable<ToDo> {
+        return this.http.put<ToDo>(`${this.baseApi}/${id}`, task);
+    }
 }
