@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
     todoTasks: ToDo[] = [];
 
     newTodoBody: string = '';
+    newTodoId: string = '';
 
     editedTask: ToDo = { id: '', body: '', completed: false };
 
@@ -22,11 +23,18 @@ export class AppComponent implements OnInit {
         // Fetch todo list
         this.todoListService.getTodoList()
             .subscribe((resp: ToDo[]) => {
+                // Divide between completed and uncompleted tasks
                 this.completedTasks = resp.filter((todo) => todo.completed);
                 this.todoTasks = resp.filter((todo) => !todo.completed);
 
-                console.log(this.completedTasks);
-                console.log(this.todoTasks);
+                // Get last id
+                const ids = resp.map((task) => parseInt(task.id));
+                if (ids.length === 0) {
+                    // Empty list
+                    this.newTodoId = '1';
+                } else {
+                    this.newTodoId = (Math.max(...ids) + 1).toString();
+                }
             });
     }
 
@@ -50,7 +58,11 @@ export class AppComponent implements OnInit {
         if (this.newTodoBody.trim().length === 0) return;
 
         // Todo to add
-        const newTodo: ToDo = { id: '6', body: this.newTodoBody, completed: false };
+        const newTodo: ToDo = {
+            id: this.newTodoId,
+            body: this.newTodoBody,
+            completed: false
+        };
         // Update the DOM
         this.todoTasks.push(newTodo);
         // Add in database

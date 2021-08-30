@@ -10,44 +10,13 @@ export class TodoListService {
 
     private baseApi: string = 'http://localhost:3000/todos';
 
-    list: ToDo[] = [
-        {
-            id: '1',
-            body: 'Go out for a walk',
-            completed: true,
-        },
-        {
-            id: '2',
-            body: 'Read p. 144',
-            completed: true,
-        },
-        {
-            id: '3',
-            body: 'Do the laundry',
-            completed: false,
-        },
-        {
-            id: '4',
-            body: 'Tidy the room',
-            completed: false,
-        },
-        {
-            id: '5',
-            body: 'Study for math exam',
-            completed: false,
-        },
-    ]
-
     constructor(private http: HttpClient) { }
 
     getTodoList(): Observable<ToDo[]> {
         return this.http.get<ToDo[]>(this.baseApi);
     }
 
-    addTodo(task: ToDo): Observable<any> {
-        return new Observable((observer) => {
-            this.list.push(task);
-            observer.next(task);
-        });
+    addTodo(task: ToDo): Observable<ToDo> {
+        return this.http.post<ToDo>(this.baseApi, task);
     }
 }
